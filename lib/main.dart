@@ -1,63 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:task_3/block/basket_cubit.dart';
+import 'package:task_3/block/product_bloc.dart';
+import 'package:task_3/cubit/product_counter_cubit.dart';
+import 'package:task_3/routes/app_router.dart';
+import 'package:get_it/get_it.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+GetIt getIt = GetIt.instance;
+
 
 void main() {
+  getIt.registerSingleton<AppRouter>(AppRouter());
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
-    );
-  }
+  State<MyApp> createState() => _MyAppState();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomePage'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    //GetIt getIt = GetIt.instance;
+    final appRouter = getIt<AppRouter>();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProductBloc>(
+            create: (BuildContext context) => ProductBloc()..add(ProductStartEvent())),
+        BlocProvider<ProductCounterCubit>(
+            create: (BuildContext context) => ProductCounterCubit()),
+        BlocProvider<BasketCubit>(create: (BuildContext context) => BasketCubit()),
+      ],
+      child: MaterialApp.router(
+        theme: ThemeData(
+          primarySwatch: Colors.orange,
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        routerConfig: appRouter.config(),
       ),
     );
   }
