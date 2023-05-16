@@ -3,6 +3,12 @@ import 'app_router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
 class AppRouter extends $AppRouter {
+  @override
+  RouteType get defaultRouteType => const CustomRouteType(
+        transitionsBuilder: TransitionsBuilders.zoomIn,
+        durationInMilliseconds: 100,
+        reverseDurationInMilliseconds: 100,
+      );
 
   @override
   List<AutoRoute> get routes => [
@@ -29,6 +35,13 @@ class AppRouter extends $AppRouter {
             page: UserInfo.page,
             children: [
               AutoRoute(page: UserInfoViewRoute.page,initial: true),
+              AutoRoute(
+                page: ShoppingHistoryViewRoute.page,
+                children: [
+                  AutoRoute(page: ShoppingListViewRoute.page, initial: true,),
+                  AutoRoute(page: PurchaseViewRoute.page),
+                ],
+              ),
             ],
           ),
         ]
