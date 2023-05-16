@@ -7,12 +7,12 @@ part of 'purchase.dart';
 // **************************************************************************
 
 _$_Purchase _$$_PurchaseFromJson(Map<String, dynamic> json) => _$_Purchase(
-      product: Product.fromJson(json['product'] as Map<String, dynamic>),
-      quantity: json['quantity'] as int,
+      orders: (json['orders'] as List<dynamic>)
+          .map((e) => Order.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_PurchaseToJson(_$_Purchase instance) =>
     <String, dynamic>{
-      'product': instance.product,
-      'quantity': instance.quantity,
+      'orders': instance.orders,
     };

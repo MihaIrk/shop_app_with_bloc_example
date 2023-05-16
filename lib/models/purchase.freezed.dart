@@ -20,8 +20,7 @@ Purchase _$PurchaseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Purchase {
-  Product get product => throw _privateConstructorUsedError;
-  int get quantity => throw _privateConstructorUsedError;
+  List<Order> get orders => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,9 +33,7 @@ abstract class $PurchaseCopyWith<$Res> {
   factory $PurchaseCopyWith(Purchase value, $Res Function(Purchase) then) =
       _$PurchaseCopyWithImpl<$Res, Purchase>;
   @useResult
-  $Res call({Product product, int quantity});
-
-  $ProductCopyWith<$Res> get product;
+  $Res call({List<Order> orders});
 }
 
 /// @nodoc
@@ -52,27 +49,14 @@ class _$PurchaseCopyWithImpl<$Res, $Val extends Purchase>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = null,
-    Object? quantity = null,
+    Object? orders = null,
   }) {
     return _then(_value.copyWith(
-      product: null == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product,
-      quantity: null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
+      orders: null == orders
+          ? _value.orders
+          : orders // ignore: cast_nullable_to_non_nullable
+              as List<Order>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ProductCopyWith<$Res> get product {
-    return $ProductCopyWith<$Res>(_value.product, (value) {
-      return _then(_value.copyWith(product: value) as $Val);
-    });
   }
 }
 
@@ -83,10 +67,7 @@ abstract class _$$_PurchaseCopyWith<$Res> implements $PurchaseCopyWith<$Res> {
       __$$_PurchaseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Product product, int quantity});
-
-  @override
-  $ProductCopyWith<$Res> get product;
+  $Res call({List<Order> orders});
 }
 
 /// @nodoc
@@ -100,18 +81,13 @@ class __$$_PurchaseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = null,
-    Object? quantity = null,
+    Object? orders = null,
   }) {
     return _then(_$_Purchase(
-      product: null == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product,
-      quantity: null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
+      orders: null == orders
+          ? _value._orders
+          : orders // ignore: cast_nullable_to_non_nullable
+              as List<Order>,
     ));
   }
 }
@@ -119,19 +95,22 @@ class __$$_PurchaseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Purchase implements _Purchase {
-  const _$_Purchase({required this.product, required this.quantity});
+  const _$_Purchase({required final List<Order> orders}) : _orders = orders;
 
   factory _$_Purchase.fromJson(Map<String, dynamic> json) =>
       _$$_PurchaseFromJson(json);
 
+  final List<Order> _orders;
   @override
-  final Product product;
-  @override
-  final int quantity;
+  List<Order> get orders {
+    if (_orders is EqualUnmodifiableListView) return _orders;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_orders);
+  }
 
   @override
   String toString() {
-    return 'Purchase(product: $product, quantity: $quantity)';
+    return 'Purchase(orders: $orders)';
   }
 
   @override
@@ -139,14 +118,13 @@ class _$_Purchase implements _Purchase {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Purchase &&
-            (identical(other.product, product) || other.product == product) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity));
+            const DeepCollectionEquality().equals(other._orders, _orders));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, product, quantity);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_orders));
 
   @JsonKey(ignore: true)
   @override
@@ -163,16 +141,12 @@ class _$_Purchase implements _Purchase {
 }
 
 abstract class _Purchase implements Purchase {
-  const factory _Purchase(
-      {required final Product product,
-      required final int quantity}) = _$_Purchase;
+  const factory _Purchase({required final List<Order> orders}) = _$_Purchase;
 
   factory _Purchase.fromJson(Map<String, dynamic> json) = _$_Purchase.fromJson;
 
   @override
-  Product get product;
-  @override
-  int get quantity;
+  List<Order> get orders;
   @override
   @JsonKey(ignore: true)
   _$$_PurchaseCopyWith<_$_Purchase> get copyWith =>
