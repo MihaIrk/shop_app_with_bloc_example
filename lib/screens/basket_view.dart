@@ -2,7 +2,6 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_3/cubit/basket_cubit.dart';
-import 'package:task_3/cubit/buy_button_cubit.dart';
 import 'package:task_3/cubit/purchase_list_cubit.dart';
 import 'package:task_3/main.dart';
 import 'package:task_3/models/order.dart';
@@ -17,7 +16,6 @@ class BasketViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Purchase? purchase;
     return Scaffold(
       appBar: AppBar(title: const Text('Корзина'),),
       body: BlocBuilder<BasketCubit, BasketState>(builder: (context, state) {
@@ -25,7 +23,6 @@ class BasketViewScreen extends StatelessWidget {
           return const Center(child: Text('В вашей корзине ничего нет'));
         }
         else {
-          purchase = Purchase(orders: state.orders);
           return Column(
             children: [
               Expanded(
@@ -38,20 +35,12 @@ class BasketViewScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
-                child: FloatingActionButton(child: BlocBuilder<BuyButtonCubit, BuyButtonState>(
-                  builder: (context, state) {
-                    if(state.loaded) {
-                      return const Text('Купить');
-                    }
-                    else {
-                      return const CircularProgressIndicator(color: Colors.white,);
-                    }
-                  },
-                ),
+                child: FloatingActionButton(
+                  child: state.loading ? const CircularProgressIndicator(color: Colors.white,) : const Text('Купить'),
                   onPressed: () async {
-                    if (purchase != null) {
-                      context.read<BuyButtonCubit>().onTap();
-                      context.read<PurchaseListCubit>().addPurchase(purchase!);
+                    if (state.orders.isNotEmpty) {
+                      context.read<PurchaseListCubit>().addPurchase(Purchase(orders: state.orders));
+                      context.read<BasketCubit>().clearBasket();
                       await Future.delayed(const Duration(seconds: 1));
                       getIt<AppRouter>().navigate(
                         const User(
@@ -61,7 +50,7 @@ class BasketViewScreen extends StatelessWidget {
                           ],
                         ),
                       );
-                      context.read<BasketCubit>().clearBasket();
+
                     }
                   },
                 ),

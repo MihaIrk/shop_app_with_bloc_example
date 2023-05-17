@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$BasketState {
   List<Order> get orders => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BasketStateCopyWith<BasketState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $BasketStateCopyWith<$Res> {
           BasketState value, $Res Function(BasketState) then) =
       _$BasketStateCopyWithImpl<$Res, BasketState>;
   @useResult
-  $Res call({List<Order> orders});
+  $Res call({List<Order> orders, bool loading});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$BasketStateCopyWithImpl<$Res, $Val extends BasketState>
   @override
   $Res call({
     Object? orders = null,
+    Object? loading = null,
   }) {
     return _then(_value.copyWith(
       orders: null == orders
           ? _value.orders
           : orders // ignore: cast_nullable_to_non_nullable
               as List<Order>,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -63,7 +69,7 @@ abstract class _$$_InitialCopyWith<$Res> implements $BasketStateCopyWith<$Res> {
       __$$_InitialCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Order> orders});
+  $Res call({List<Order> orders, bool loading});
 }
 
 /// @nodoc
@@ -77,12 +83,17 @@ class __$$_InitialCopyWithImpl<$Res>
   @override
   $Res call({
     Object? orders = null,
+    Object? loading = null,
   }) {
     return _then(_$_Initial(
       orders: null == orders
           ? _value._orders
           : orders // ignore: cast_nullable_to_non_nullable
               as List<Order>,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -90,7 +101,8 @@ class __$$_InitialCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Initial implements _Initial {
-  const _$_Initial({required final List<Order> orders}) : _orders = orders;
+  const _$_Initial({required final List<Order> orders, this.loading = false})
+      : _orders = orders;
 
   final List<Order> _orders;
   @override
@@ -101,8 +113,12 @@ class _$_Initial implements _Initial {
   }
 
   @override
+  @JsonKey()
+  final bool loading;
+
+  @override
   String toString() {
-    return 'BasketState(orders: $orders)';
+    return 'BasketState(orders: $orders, loading: $loading)';
   }
 
   @override
@@ -110,12 +126,13 @@ class _$_Initial implements _Initial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initial &&
-            const DeepCollectionEquality().equals(other._orders, _orders));
+            const DeepCollectionEquality().equals(other._orders, _orders) &&
+            (identical(other.loading, loading) || other.loading == loading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_orders));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_orders), loading);
 
   @JsonKey(ignore: true)
   @override
@@ -125,10 +142,13 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements BasketState {
-  const factory _Initial({required final List<Order> orders}) = _$_Initial;
+  const factory _Initial(
+      {required final List<Order> orders, final bool loading}) = _$_Initial;
 
   @override
   List<Order> get orders;
+  @override
+  bool get loading;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>

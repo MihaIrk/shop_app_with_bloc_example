@@ -7,7 +7,7 @@ part '../cubit/basket_state.dart';
 part 'basket_cubit.freezed.dart';
 
 class BasketCubit extends Cubit<BasketState> {
-  BasketCubit() : super(const BasketState(orders: []));
+  BasketCubit() : super(const BasketState(orders: [],loading: false));
 
   void addPurchase(Product product, int quantity) {
     final orders = state.orders.toList();
@@ -28,8 +28,9 @@ class BasketCubit extends Cubit<BasketState> {
     emit(state.copyWith(orders: orders));
   }
 
-  void clearBasket(){
-    final orders = state.orders.toList();
-    emit(state.copyWith(orders: orders));
+  void clearBasket()async{
+    emit(state.copyWith(loading: true));
+    await Future.delayed(const Duration(seconds: 1));
+    emit(state.copyWith(orders: [],loading: false));
   }
 }
