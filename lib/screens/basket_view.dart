@@ -61,6 +61,7 @@ class BasketViewScreen extends StatelessWidget {
                           ],
                         ),
                       );
+                      context.read<BasketCubit>().clearBasket();
                     }
                   },
                 ),
@@ -94,10 +95,15 @@ class BasketItem extends StatelessWidget {
             }, icon: const Icon(Icons.keyboard_arrow_down,),style: ElevatedButton.styleFrom(fixedSize: const Size(5.0,5.0)),),
           ],
         ),
-        Expanded(child: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Text(order.product.title, maxLines: 2,),
-        )),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              order.product.title,
+              maxLines: 2,
+            ),
+          ),
+        ),
         IconButton(
           icon: const Icon(Icons.delete_forever),
           onPressed: () {
