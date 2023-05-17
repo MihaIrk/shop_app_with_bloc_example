@@ -48,15 +48,15 @@ class AppRouter extends $AppRouter {
               AutoRoute(
                 page: UserInfoViewRoute.page,
                 initial: true,
-                path: 'userInfo',
+                path: 'userInfo'
               ),
               AutoRoute(
                 page: ShoppingHistoryViewRoute.page,
-                path: 'user/shoppingHistory',
+                path: 'shoppingHistory',
               ),
               AutoRoute(
                 page: PurchaseViewRoute.page,
-                path: 'user/shoppingHistory/orders/order:id',
+                path: 'shoppingHistory/order:id',
               ),
             ],
           ),
