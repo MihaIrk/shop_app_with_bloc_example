@@ -65,17 +65,17 @@ class AppRouter extends $AppRouter {
   ];
 }
 
-@RoutePage(name:'Products')
+@RoutePage(name:'products')
 class ProductsScreen extends AutoRouter{
   const ProductsScreen({super.key});
 }
 
-@RoutePage(name:'Basket')
+@RoutePage(name:'basket')
 class BasketScreen extends AutoRouter{
   const BasketScreen({super.key});
 }
 
-@RoutePage(name:'User')
+@RoutePage(name:'user')
 class UserInfoScreen extends AutoRouter{
   const UserInfoScreen({super.key});
 }
