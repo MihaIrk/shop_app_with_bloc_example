@@ -26,17 +26,24 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    //GetIt getIt = GetIt.instance;
     final appRouter = getIt<AppRouter>();
     return MultiBlocProvider(
       providers: [
         BlocProvider<ProductBloc>(
-            create: (BuildContext context) => ProductBloc()..add(ProductStartEvent())),
+          create: (BuildContext context) => ProductBloc()
+            ..add(
+              const ProductStartEvent(),
+            ),
+        ),
         BlocProvider<ProductCounterCubit>(
-            create: (BuildContext context) => ProductCounterCubit()),
-        BlocProvider<BasketCubit>(create: (BuildContext context) => BasketCubit()),
-        BlocProvider<BuyButtonCubit>(create: (BuildContext context) => BuyButtonCubit()),
-        BlocProvider<PurchaseListCubit>(create: (BuildContext context) => PurchaseListCubit()),
+          create: (BuildContext context) => ProductCounterCubit()..reset(),
+        ),
+        BlocProvider<BasketCubit>(
+          create: (BuildContext context) => BasketCubit(),),
+        BlocProvider<BuyButtonCubit>(
+          create: (BuildContext context) => BuyButtonCubit(),),
+        BlocProvider<PurchaseListCubit>(
+          create: (BuildContext context) => PurchaseListCubit(),),
       ],
       child: MaterialApp.router(
         theme: ThemeData(

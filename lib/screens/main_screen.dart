@@ -15,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
-      routes: [
+      routes: const [
         ProductViewRoute(),
         BasketViewRoute(),
         UserInfoViewRoute(),
@@ -24,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
         return BottomNavigationBar(
           currentIndex: tabsRouter.activeIndex,
           onTap: tabsRouter.setActiveIndex,
-          items: [
+          items: const [
             BottomNavigationBarItem(icon: Icon(Icons.manage_search_sharp),label: 'Products',),
             BottomNavigationBarItem(icon: Icon(Icons.shopping_basket),label: 'Basket',),
             BottomNavigationBarItem(icon: Icon(Icons.person),label: 'profile',)

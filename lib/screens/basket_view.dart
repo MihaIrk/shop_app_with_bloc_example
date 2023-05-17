@@ -19,67 +19,92 @@ class BasketViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Purchase? purchase;
     return Scaffold(
-      appBar: AppBar(title: Text('kjhgkh'),),
+      appBar: AppBar(title: const Text('Корзина'),),
       body: BlocBuilder<BasketCubit, BasketState>(builder: (context, state) {
         if (state.orders.isEmpty) {
-          return Text('Basket is empty');
+          return const Center(child: Text('В вашей корзине ничего нет'));
         }
         else {
           purchase = Purchase(orders: state.orders);
-          print('Длина ордеров${purchase!.orders.length}');
-          return ListView.builder(
-            itemCount: state.orders.length,
-            itemBuilder: (context, index) {
-              return BasketItem(order: state.orders[index]);
-            },
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: state.orders.length,
+                  itemBuilder: (context, index) {
+                    return BasketItem(order: state.orders[index], index: index,);
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: FloatingActionButton(child: BlocBuilder<BuyButtonCubit, BuyButtonState>(
+                  builder: (context, state) {
+                    if(state.loaded) {
+                      return const Text('Купить');
+                    }
+                    else {
+                      return const CircularProgressIndicator(color: Colors.white,);
+                    }
+                  },
+                ),
+                  onPressed: () async {
+                    if (purchase != null) {
+                      context.read<BuyButtonCubit>().onTap();
+                      context.read<PurchaseListCubit>().addPurchase(purchase!);
+                      await Future.delayed(const Duration(seconds: 1));
+                      getIt<AppRouter>().navigate(
+                        const User(
+                          children: [
+                            UserInfoViewRoute(),
+                            ShoppingHistoryViewRoute(),
+                          ],
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
           );
         }
       },
       ),
-      floatingActionButton: FloatingActionButton(
-        child: BlocBuilder<BuyButtonCubit, BuyButtonState>(
-          builder: (context, state) {
-            if(state.loaded) {
-              return Text('Купить');
-            }
-            else {
-              return CircularProgressIndicator(color: Colors.white,);
-            }
-          },
-        ),
-        onPressed: () {
-          context.read<BuyButtonCubit>().onTap();
-          context.read<PurchaseListCubit>().addPurchase(purchase!);
-          getIt<AppRouter>().navigate(
-            UserInfo(
-              children: [
-                UserInfoViewRoute(),
-                ShoppingHistoryViewRoute(),
-              ],
-            ),
-          );
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
 
 
 class BasketItem extends StatelessWidget {
-  const BasketItem({Key? key, required this.order}) : super(key: key);
+  const BasketItem({Key? key, required this.order, required this.index}) : super(key: key);
+  final int index;
   final Order order;
-
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: IconButton(icon: Icon(Icons.delete_forever), onPressed: () {
-          context.read<BasketCubit>().deletePurchase(order.product.id);
-        },),
-        title: Text(order.product.title),
-        trailing: Text('Количество ${order.quantity}'),
-      ),
+    return Row(
+      children: [
+        Column(
+          children: [
+            IconButton(onPressed: (){
+              context.read<BasketCubit>().changeQuantityOrder(order.product, order.quantity + 1, index);
+            }, icon: const Icon(Icons.keyboard_arrow_up,),),
+            Text('Кол-во: ${order.quantity}'),
+            IconButton(onPressed: (){
+              context.read<BasketCubit>().changeQuantityOrder(order.product, order.quantity - 1, index);
+            }, icon: const Icon(Icons.keyboard_arrow_down,),style: ElevatedButton.styleFrom(fixedSize: const Size(5.0,5.0)),),
+          ],
+        ),
+        Expanded(child: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Text(order.product.title, maxLines: 2,),
+        )),
+        IconButton(
+          icon: const Icon(Icons.delete_forever),
+          onPressed: () {
+            context.read<BasketCubit>().deletePurchase(order.product.id);
+          },
+        ),
+      ],
     );
   }
 }

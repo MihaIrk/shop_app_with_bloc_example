@@ -38,7 +38,7 @@ class ProductsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        getIt<AppRouter>().push(SelectedProductRoute(product: product));
+        getIt<AppRouter>().push(SelectedProductRoute(product: product, id:product.id));
       },
       child: Card(
         child: ListTile(

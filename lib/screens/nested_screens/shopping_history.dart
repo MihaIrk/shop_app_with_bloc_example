@@ -14,11 +14,11 @@ class ShoppingHistoryViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Spison Pokupok'),),
+      appBar: AppBar(
+        title: const Text('История покупок'),),
       body: BlocBuilder<PurchaseListCubit, PurchaseListState>(builder: (context, state) {
-        print('Длина покупки в истории${state.purchases.length}');
         if(state.purchases.isEmpty) {
-          return Center(child: Text('У вас нет заказов вы нищеброд'),);
+          return const Center(child: Text('У вас нет заказов вы нищеброд'),);
         }
         else{
           return ListView.builder(itemCount: state.purchases.length, itemBuilder: (context, index) => PurchaseTile(purchase: state.purchases[index], index: index));
@@ -38,10 +38,10 @@ class PurchaseTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         getIt<AppRouter>().navigate(
-          UserInfo(
+          User(
             children: [
-              UserInfoViewRoute(),
-              ShoppingHistoryViewRoute(),
+              const UserInfoViewRoute(),
+              const ShoppingHistoryViewRoute(),
               PurchaseViewRoute(purchase: purchase, index: index),
             ],
           ),
@@ -51,18 +51,18 @@ class PurchaseTile extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            content: Container(
+            content: SizedBox(
               height: 200,
               width: 200,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('Delete purchase?'),
+                  const Text('Удалить покупку из истории?'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      ElevatedButton(onPressed: () {}, child: Text('Yes'),),
-                      ElevatedButton(onPressed: () {getIt<AppRouter>().pop();}, child: Text('No'),),
+                      ElevatedButton(onPressed: () {context.read<PurchaseListCubit>().deletePurchase(purchase);getIt<AppRouter>().pop();}, child: const Text('Yes'),),
+                      ElevatedButton(onPressed: () {getIt<AppRouter>().pop();}, child: const Text('No'),),
                     ],
                   )
                 ],

@@ -6,17 +6,18 @@ import 'package:task_3/cubit/product_counter_cubit.dart';
 import 'package:task_3/main.dart';
 import 'package:task_3/routes/app_router.dart';
 import 'package:task_3/routes/app_router.gr.dart';
-
 import '../../models/product.dart';
 
 @RoutePage()
 class SelectedProductScreen extends StatelessWidget {
-  const SelectedProductScreen({Key? key, required this.product}) : super(key: key);
+  const SelectedProductScreen({Key? key,required this.product, @PathParam('id') this.id}) : super(key: key);
+  final int? id;
   final Product product;
+
 
   @override
   Widget build(BuildContext context) {
-    int test = 1;
+    int quantity = 1;
     return Scaffold(
       appBar: AppBar(title: Text(product.title),),
       body: SingleChildScrollView(
@@ -27,29 +28,27 @@ class SelectedProductScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(onPressed: (){context.read<ProductCounterCubit>().increment(); test += 1;}, child: Icon(Icons.add)),
-                BlocBuilder<ProductCounterCubit, int>(
+                ElevatedButton(onPressed: (){context.read<ProductCounterCubit>().decrement();quantity -= 1;}, child: const Icon(Icons.minimize)),
+                BlocBuilder<ProductCounterCubit, ProductCounterState>(
                   builder: (context, state) {
-                    test = state;
-                    return Text('$state');
+                    quantity = state.value;
+                    return Text('${state.value}');
                   },
                 ),
-                ElevatedButton(onPressed: (){context.read<ProductCounterCubit>().decrement();test -= 1;}, child: Icon(Icons.minimize)),
+                ElevatedButton(onPressed: (){context.read<ProductCounterCubit>().increment(); quantity += 1;}, child: const Icon(Icons.add)),
               ],
             ),
             ElevatedButton(onPressed: () {
-              print(test);
-              context.read<BasketCubit>().addPurchase(product, test);
-              getIt<AppRouter>().navigate(Basket(
-                  children: [
-                    BasketViewRoute(),
-                  ],
+              context.read<BasketCubit>().addPurchase(product, quantity);
+              context.read<ProductCounterCubit>().reset();
+              getIt<AppRouter>().navigate(const Basket(
+                children: [
+                  BasketViewRoute(),
+                ],
               ),
               );
-              test = 0;
-              print(test);
-
-            }, child: Text('add to basket'),)
+              },
+              child: const Text('Добавить в корзину'),)
           ],
         ),
       ),

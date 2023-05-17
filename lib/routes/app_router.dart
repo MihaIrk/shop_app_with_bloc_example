@@ -20,27 +20,43 @@ class AppRouter extends $AppRouter {
           AutoRoute(
             initial: true,
             page: Products.page,
+            path: '',
             children: [
-              AutoRoute(page: ProductViewRoute.page,initial: true),
-              AutoRoute(page: SelectedProductRoute.page,)
+              AutoRoute(
+                page: ProductViewRoute.page,
+                initial: true,
+                path: 'market/allproducts',
+              ),
+              AutoRoute(
+                page: SelectedProductRoute.page,
+                path: 'market/Product/:id',
+              )
             ],
           ),
           AutoRoute(
             page: Basket.page,
             children: [
-              AutoRoute(page: BasketViewRoute.page,initial: true),
+              AutoRoute(
+                page: BasketViewRoute.page,
+                initial: true,
+              ),
             ],
           ),
           AutoRoute(
-            page: UserInfo.page,
+            page: User.page,
             children: [
-              AutoRoute(page: UserInfoViewRoute.page,initial: true),
+              AutoRoute(
+                page: UserInfoViewRoute.page,
+                initial: true,
+                path: 'userInfo',
+              ),
               AutoRoute(
                 page: ShoppingHistoryViewRoute.page,
-                children: [
-                  AutoRoute(page: ShoppingListViewRoute.page, initial: true,),
-                  AutoRoute(page: PurchaseViewRoute.page),
-                ],
+                path: 'user/shoppingHistory',
+              ),
+              AutoRoute(
+                page: PurchaseViewRoute.page,
+                path: 'user/shoppingHistory/orders/order:id',
               ),
             ],
           ),
@@ -59,7 +75,7 @@ class BasketScreen extends AutoRouter{
   const BasketScreen({super.key});
 }
 
-@RoutePage(name:'UserInfo')
+@RoutePage(name:'User')
 class UserInfoScreen extends AutoRouter{
   const UserInfoScreen({super.key});
 }

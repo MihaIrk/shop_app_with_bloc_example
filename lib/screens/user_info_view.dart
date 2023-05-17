@@ -12,9 +12,9 @@ class UserInfoViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        child: Text('Shopping History'),
+        child: const Text('История покупок'),
         onPressed: () {
-          getIt<AppRouter>().push(ShoppingHistoryViewRoute());
+          getIt<AppRouter>().push(const ShoppingHistoryViewRoute());
         },
       ),
     );
