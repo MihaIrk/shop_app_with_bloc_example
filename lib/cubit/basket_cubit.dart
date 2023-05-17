@@ -21,10 +21,17 @@ class BasketCubit extends Cubit<BasketState> {
     emit(state.copyWith(orders: orders));
   }
 
-  void changeQuantityOrder(Product product, int newQuantity, int index ){
+  void incrementQuantityOrder(Product product, int quantity, int index ){
     final orders = state.orders.toList();
     orders.removeWhere((element) => element.product.id == product.id);
-    orders.insert(index,Order(product: product, quantity: newQuantity));
+    orders.insert(index,Order(product: product, quantity: quantity + 1));
+    emit(state.copyWith(orders: orders));
+  }
+
+  void decrementQuantityOrder(Product product, int quantity, int index ){
+    final orders = state.orders.toList();
+    orders.removeWhere((element) => element.product.id == product.id);
+    orders.insert(index,Order(product: product, quantity: quantity >= 2 ? quantity -1  : quantity));
     emit(state.copyWith(orders: orders));
   }
 
