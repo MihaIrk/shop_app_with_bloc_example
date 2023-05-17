@@ -10,26 +10,26 @@ class BasketCubit extends Cubit<BasketState> {
   BasketCubit() : super(const BasketState(orders: []));
 
   void addPurchase(Product product, int quantity) {
-    final List<Order> orders = [];
-    orders.addAll(state.orders);
-    final newOrder = Order(product: product, quantity: quantity);
-    orders.add(newOrder);
-    emit(BasketState(orders: orders));
+    final orders = state.orders.toList();
+    orders.add(Order(product: product, quantity: quantity));
+    emit(state.copyWith(orders: orders));
   }
 
   void deletePurchase(int productId) {
-    final List<Order> orders = [];
-    orders.addAll(state.orders);
+    final orders = state.orders.toList();
     orders.removeWhere((element) => element.product.id == productId);
-    orders.sort();
-    emit(BasketState(orders: orders));
+    emit(state.copyWith(orders: orders));
   }
 
   void changeQuantityOrder(Product product, int newQuantity, int index ){
-    final List<Order> orders = [];
-    orders.addAll(state.orders);
+    final orders = state.orders.toList();
     orders.removeWhere((element) => element.product.id == product.id);
     orders.insert(index,Order(product: product, quantity: newQuantity));
-    emit(BasketState(orders: orders));
+    emit(state.copyWith(orders: orders));
+  }
+
+  void clearBasket(){
+    final orders = state.orders.toList();
+    emit(state.copyWith(orders: orders));
   }
 }
