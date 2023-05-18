@@ -76,11 +76,11 @@ class BasketItem extends StatelessWidget {
         Column(
           children: [
             IconButton(onPressed: (){
-              context.read<BasketCubit>().incrementQuantityOrder(order.product, order.quantity, index);
+              context.read<BasketCubit>().incrementQuantityOrder(index);
             }, icon: const Icon(Icons.keyboard_arrow_up,),),
             Text('Кол-во: ${order.quantity}'),
             IconButton(onPressed: (){
-              context.read<BasketCubit>().decrementQuantityOrder(order.product, order.quantity, index);
+              context.read<BasketCubit>().decrementQuantityOrder(index);
             }, icon: const Icon(Icons.keyboard_arrow_down,),style: ElevatedButton.styleFrom(fixedSize: const Size(5.0,5.0)),),
           ],
         ),
