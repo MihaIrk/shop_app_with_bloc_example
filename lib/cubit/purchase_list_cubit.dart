@@ -10,17 +10,14 @@ class PurchaseListCubit extends Cubit<PurchaseListState> {
   PurchaseListCubit() : super(const PurchaseListState(purchases: []));
 
   void addPurchase(Purchase purchase){
-    final List<Purchase> purchases = [];
-    purchases.addAll(state.purchases);
+    final purchases = state.purchases.toList();
     purchases.add(purchase);
-    emit(PurchaseListState(purchases: purchases));
+    emit(state.copyWith(purchases: purchases));
   }
 
   void deletePurchase(Purchase purchase){
-    final List<Purchase> purchases = [];
-    purchases.addAll(state.purchases);
+    final purchases = state.purchases.toList();
     purchases.remove(purchase);
-    emit(PurchaseListState(purchases: purchases));
-
+    emit(state.copyWith(purchases: purchases));
   }
 }
