@@ -8,18 +8,12 @@ class ProductCounterCubit extends Cubit<ProductCounterState> {
   ProductCounterCubit() : super(const ProductCounterState(value: 1));
 
   void increment(){
-    int value = state.value;
-    value += 1;
-    emit(ProductCounterState(value: value));
+    emit(state.copyWith(value: state.value + 1));
   }
   void decrement() {
-    int value = state.value;
-    if(value >=2){
-      value -= 1;
-    }
-    emit(ProductCounterState(value: value));
+    emit(state.copyWith(value: state.value >=2 ? state.value -1 : state.value));
   }
   void reset(){
-    emit(const ProductCounterState(value: 1));
+    emit(state.copyWith(value: 1));
   }
 }
