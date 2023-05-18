@@ -15,40 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ProductEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ProductStartEvent value) started,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ProductStartEvent value)? started,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ProductStartEvent value)? started,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
+mixin _$ProductEvent {}
 
 /// @nodoc
 abstract class $ProductEventCopyWith<$Res> {
@@ -91,7 +58,7 @@ class _$ProductStartEvent implements ProductStartEvent {
 
   @override
   String toString() {
-    return 'ProductEvent.started()';
+    return 'ProductEvent()';
   }
 
   @override
@@ -102,62 +69,6 @@ class _$ProductStartEvent implements ProductStartEvent {
 
   @override
   int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-  }) {
-    return started();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-  }) {
-    return started?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ProductStartEvent value) started,
-  }) {
-    return started(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ProductStartEvent value)? started,
-  }) {
-    return started?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ProductStartEvent value)? started,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started(this);
-    }
-    return orElse();
-  }
 }
 
 abstract class ProductStartEvent implements ProductEvent {
@@ -167,7 +78,7 @@ abstract class ProductStartEvent implements ProductEvent {
 /// @nodoc
 mixin _$ProductState {
   String? get text => throw _privateConstructorUsedError;
-  bool get loaded => throw _privateConstructorUsedError;
+  Load get load => throw _privateConstructorUsedError;
   List<Product> get products => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -181,7 +92,7 @@ abstract class $ProductStateCopyWith<$Res> {
           ProductState value, $Res Function(ProductState) then) =
       _$ProductStateCopyWithImpl<$Res, ProductState>;
   @useResult
-  $Res call({String? text, bool loaded, List<Product> products});
+  $Res call({String? text, Load load, List<Product> products});
 }
 
 /// @nodoc
@@ -198,7 +109,7 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
   @override
   $Res call({
     Object? text = freezed,
-    Object? loaded = null,
+    Object? load = null,
     Object? products = null,
   }) {
     return _then(_value.copyWith(
@@ -206,10 +117,10 @@ class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
-      loaded: null == loaded
-          ? _value.loaded
-          : loaded // ignore: cast_nullable_to_non_nullable
-              as bool,
+      load: null == load
+          ? _value.load
+          : load // ignore: cast_nullable_to_non_nullable
+              as Load,
       products: null == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
@@ -226,7 +137,7 @@ abstract class _$$_ProductStateCopyWith<$Res>
       __$$_ProductStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? text, bool loaded, List<Product> products});
+  $Res call({String? text, Load load, List<Product> products});
 }
 
 /// @nodoc
@@ -241,7 +152,7 @@ class __$$_ProductStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? text = freezed,
-    Object? loaded = null,
+    Object? load = null,
     Object? products = null,
   }) {
     return _then(_$_ProductState(
@@ -249,10 +160,10 @@ class __$$_ProductStateCopyWithImpl<$Res>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
-      loaded: null == loaded
-          ? _value.loaded
-          : loaded // ignore: cast_nullable_to_non_nullable
-              as bool,
+      load: null == load
+          ? _value.load
+          : load // ignore: cast_nullable_to_non_nullable
+              as Load,
       products: null == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
@@ -265,14 +176,16 @@ class __$$_ProductStateCopyWithImpl<$Res>
 
 class _$_ProductState implements _ProductState {
   const _$_ProductState(
-      {this.text, this.loaded = false, final List<Product> products = const []})
+      {this.text,
+      this.load = Load.empty,
+      final List<Product> products = const []})
       : _products = products;
 
   @override
   final String? text;
   @override
   @JsonKey()
-  final bool loaded;
+  final Load load;
   final List<Product> _products;
   @override
   @JsonKey()
@@ -284,7 +197,7 @@ class _$_ProductState implements _ProductState {
 
   @override
   String toString() {
-    return 'ProductState(text: $text, loaded: $loaded, products: $products)';
+    return 'ProductState(text: $text, load: $load, products: $products)';
   }
 
   @override
@@ -293,13 +206,13 @@ class _$_ProductState implements _ProductState {
         (other.runtimeType == runtimeType &&
             other is _$_ProductState &&
             (identical(other.text, text) || other.text == text) &&
-            (identical(other.loaded, loaded) || other.loaded == loaded) &&
+            (identical(other.load, load) || other.load == load) &&
             const DeepCollectionEquality().equals(other._products, _products));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, text, loaded,
-      const DeepCollectionEquality().hash(_products));
+  int get hashCode => Object.hash(
+      runtimeType, text, load, const DeepCollectionEquality().hash(_products));
 
   @JsonKey(ignore: true)
   @override
@@ -311,13 +224,13 @@ class _$_ProductState implements _ProductState {
 abstract class _ProductState implements ProductState {
   const factory _ProductState(
       {final String? text,
-      final bool loaded,
+      final Load load,
       final List<Product> products}) = _$_ProductState;
 
   @override
   String? get text;
   @override
-  bool get loaded;
+  Load get load;
   @override
   List<Product> get products;
   @override

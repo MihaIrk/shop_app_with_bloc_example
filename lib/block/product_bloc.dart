@@ -9,16 +9,14 @@ part 'product_state.dart';
 part 'product_bloc.freezed.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  ProductBloc() : super(ProductState(text:'jhdjhgfjhgjhfg',)) {
+  ProductBloc() : super(ProductState(text:'',)) {
     on<ProductStartEvent>((event, emit) async {
-      emit(ProductState(text: 'loading...',loaded: false));
-      //await Future.delayed(Duration(seconds: 2));
+      emit(const ProductState(text: 'loading...',load: Load.loading));
       final dio = Dio();
       final request = await dio.get('https://fakestoreapi.com/products');
       final responseList = request.data as List<dynamic>;
       final productList = responseList.map((e) => Product.fromJson(e as Map<String,dynamic>)).toList();
-      print(productList.length);
-      emit(ProductState(text: 'loaded!', loaded: true, products: productList));
+      emit(ProductState(text: 'loaded!', load: Load.loaded, products: productList));
     });
   }
 }

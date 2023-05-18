@@ -14,15 +14,24 @@ class ProductViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductBloc,ProductState>(
+    return BlocBuilder<ProductBloc, ProductState>(
       builder: (context, state) {
-        if(state.loaded == false) {
-          return Column(mainAxisAlignment: MainAxisAlignment.center,children: [Text("${state.text}",), CircularProgressIndicator()],);
-        }
-        else {
+        if (state.load == Load.loading) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "${state.text}",
+              ),
+              const CircularProgressIndicator(),
+            ],
+          );
+        } else {
           return ListView.builder(
             itemCount: state.products.length,
-            itemBuilder: (context, index) => ProductsItem(product: state.products[index],),
+            itemBuilder: (context, index) => ProductsItem(
+              product: state.products[index],
+            ),
           );
         }
       },
