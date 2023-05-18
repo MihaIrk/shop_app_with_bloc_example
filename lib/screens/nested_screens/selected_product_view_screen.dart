@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_3/cubit/basket_cubit.dart';
-import 'package:task_3/cubit/product_counter_cubit.dart';
+import 'package:task_3/cubit/basket_cubit/basket_cubit.dart';
+import 'package:task_3/cubit/product_counter_cubit/product_counter_cubit.dart';
 import 'package:task_3/main.dart';
 import 'package:task_3/routes/app_router.dart';
 import 'package:task_3/routes/app_router.gr.dart';

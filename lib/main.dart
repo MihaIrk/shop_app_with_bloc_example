@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:task_3/cubit/basket_cubit.dart';
-import 'package:task_3/block/product_bloc.dart';
-import 'package:task_3/cubit/product_counter_cubit.dart';
-import 'package:task_3/cubit/purchase_list_cubit.dart';
+import 'package:task_3/cubit/basket_cubit/basket_cubit.dart';
+import 'package:task_3/cubit/product_counter_cubit/product_counter_cubit.dart';
+import 'package:task_3/cubit/purchase_list_cubit/purchase_list_cubit.dart';
 import 'package:task_3/routes/app_router.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'bloc/product_bloc/product_bloc.dart';
 
 GetIt getIt = GetIt.instance;
 

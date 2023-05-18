@@ -1,9 +1,8 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_3/block/product_bloc.dart';
 import 'package:task_3/main.dart';
-
+import '../bloc/product_bloc/product_bloc.dart';
 import '../models/product.dart';
 import '../routes/app_router.dart';
 import '../routes/app_router.gr.dart';

@@ -1,8 +1,8 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_3/cubit/basket_cubit.dart';
-import 'package:task_3/cubit/purchase_list_cubit.dart';
+import 'package:task_3/cubit/basket_cubit/basket_cubit.dart';
+import 'package:task_3/cubit/purchase_list_cubit/purchase_list_cubit.dart';
 import 'package:task_3/main.dart';
 import 'package:task_3/models/order.dart';
 import 'package:task_3/routes/app_router.dart';

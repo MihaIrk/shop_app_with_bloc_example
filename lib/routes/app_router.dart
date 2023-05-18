@@ -25,16 +25,17 @@ class AppRouter extends $AppRouter {
               AutoRoute(
                 page: ProductViewRoute.page,
                 initial: true,
-                path: 'market/allproducts',
+                path: 'market/allProducts',
               ),
               AutoRoute(
                 page: SelectedProductRoute.page,
-                path: 'market/Product/:id',
+                path: 'market/product/:id',
               )
             ],
           ),
           AutoRoute(
             page: Basket.page,
+            path: 'basket',
             children: [
               AutoRoute(
                 page: BasketViewRoute.page,
@@ -44,11 +45,11 @@ class AppRouter extends $AppRouter {
           ),
           AutoRoute(
             page: User.page,
+            path: 'user',
             children: [
               AutoRoute(
                 page: UserInfoViewRoute.page,
                 initial: true,
-                path: 'userInfo'
               ),
               AutoRoute(
                 page: ShoppingHistoryViewRoute.page,
