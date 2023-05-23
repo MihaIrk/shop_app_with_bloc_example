@@ -9,9 +9,4 @@ class ProductState with _$ProductState {
   }) = _ProductState;
 }
 
-enum Load {
-  empty,
-  loading,
-  loaded,
-  error,
-}
+enum Load {empty, loading, loaded, error}
