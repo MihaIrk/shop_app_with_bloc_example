@@ -50,7 +50,6 @@ class BasketViewScreen extends StatelessWidget {
                           ],
                         ),
                       );
-
                     }
                   },
                 ),
@@ -96,7 +95,7 @@ class BasketItem extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.delete_forever),
           onPressed: () {
-            context.read<BasketCubit>().deletePurchase(order.product.id);
+            context.read<BasketCubit>().deleteOrder(order.product.id);
           },
         ),
       ],

@@ -12,71 +12,71 @@ class AppRouter extends $AppRouter {
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(
-      page: MainRoute.page,
-      path: '/',
-      initial: true,
-      children: [
-          AutoRoute(
-            initial: true,
-            page: Products.page,
-            path: '',
-            children: [
-              AutoRoute(
-                page: ProductViewRoute.page,
-                initial: true,
-                path: 'market/allProducts',
-              ),
-              AutoRoute(
-                page: SelectedProductRoute.page,
-                path: 'market/product/:id',
-              )
-            ],
-          ),
-          AutoRoute(
-            page: Basket.page,
-            path: 'basket',
-            children: [
-              AutoRoute(
-                page: BasketViewRoute.page,
-                initial: true,
-              ),
-            ],
-          ),
-          AutoRoute(
-            page: User.page,
-            path: 'user',
-            children: [
-              AutoRoute(
-                page: UserInfoViewRoute.page,
-                initial: true,
-              ),
-              AutoRoute(
-                page: ShoppingHistoryViewRoute.page,
-                path: 'shoppingHistory',
-              ),
-              AutoRoute(
-                page: PurchaseViewRoute.page,
-                path: 'shoppingHistory/order:id',
-              ),
-            ],
-          ),
-        ]
-    ),
-  ];
+        AutoRoute(
+          page: MainRoute.page,
+          path: '/',
+          initial: true,
+          children: [
+            AutoRoute(
+              initial: true,
+              page: Products.page,
+              path: '',
+              children: [
+                AutoRoute(
+                  page: ProductViewRoute.page,
+                  initial: true,
+                  path: 'market/allProducts',
+                ),
+                AutoRoute(
+                  page: SelectedProductRoute.page,
+                  path: 'market/product/:id',
+                ),
+              ],
+            ),
+            AutoRoute(
+              page: Basket.page,
+              path: 'basket',
+              children: [
+                AutoRoute(
+                  page: BasketViewRoute.page,
+                  initial: true,
+                ),
+              ],
+            ),
+            AutoRoute(
+              page: User.page,
+              path: 'user',
+              children: [
+                AutoRoute(
+                  page: UserInfoViewRoute.page,
+                  initial: true,
+                ),
+                AutoRoute(
+                  page: ShoppingHistoryViewRoute.page,
+                  path: 'shoppingHistory',
+                ),
+                AutoRoute(
+                  page: PurchaseViewRoute.page,
+                  path: 'shoppingHistory/order:id',
+                ),
+              ],
+            ),
+          ],
+        ),
+      ];
 }
 
 @RoutePage(name:'products')
-class ProductsScreen extends AutoRouter{
+class ProductsScreen extends AutoRouter {
   const ProductsScreen({super.key});
 }
 
 @RoutePage(name:'basket')
-class BasketScreen extends AutoRouter{
+class BasketScreen extends AutoRouter {
   const BasketScreen({super.key});
 }
 
 @RoutePage(name:'user')
-class UserInfoScreen extends AutoRouter{
+class UserInfoScreen extends AutoRouter {
   const UserInfoScreen({super.key});
 }

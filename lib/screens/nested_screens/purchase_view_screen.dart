@@ -34,10 +34,12 @@ class PurchaseOrders extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         getIt<AppRouter>().navigate(
-          Products(children: [
-            const ProductViewRoute(),
-            SelectedProductRoute(product: order.product, id: order.product.id)
-          ]),
+          Products(
+            children: [
+              const ProductViewRoute(),
+              SelectedProductRoute(product: order.product, id: order.product.id)
+            ],
+          ),
         );
       },
       child: Card(

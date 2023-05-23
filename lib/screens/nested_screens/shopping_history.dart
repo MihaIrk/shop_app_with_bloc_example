@@ -15,7 +15,8 @@ class ShoppingHistoryViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('История покупок'),),
+        title: const Text('История покупок'),
+      ),
       body: BlocBuilder<PurchaseListCubit, PurchaseListState>(builder: (context, state) {
         if(state.purchases.isEmpty) {
           return const Center(child: Text('У вас нет заказов вы нищеброд'),);
