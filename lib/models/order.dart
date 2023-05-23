@@ -6,6 +6,7 @@ part 'order.g.dart';
 
 @freezed
 class Order with _$Order {
+  const Order._();
   const factory Order({
     required Product product,
     required int quantity,
